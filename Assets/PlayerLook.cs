@@ -19,6 +19,11 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LookAround();
+    }
+
+    private void LookAround()
+    {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
@@ -30,6 +35,4 @@ public class PlayerLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
     }
-
-   // private void 
 }
