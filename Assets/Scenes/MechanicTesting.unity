@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 599984505}
   - component: {fileID: 599984506}
   m_Layer: 0
-  m_Name: Hinge
+  m_Name: HingeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 2079263873}
   - component: {fileID: 2079263874}
   m_Layer: 0
-  m_Name: Hinge
+  m_Name: HingeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

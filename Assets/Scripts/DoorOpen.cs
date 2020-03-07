@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
-    private Animator animator;
+    private Animator animatorLeft;
+    private Animator animatorRight;
     private bool isOpen = false;
     private bool isInRange = false;
+    private bool leftHinge = false;
+    private bool rightHinge = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = transform.Find("Hinge").GetComponent<Animator>();
+        if (transform.Find("HingeLeft"))
+        {
+            animatorLeft = transform.Find("HingeLeft").GetComponent<Animator>();
+            leftHinge = true;
+        }
+
+        if (transform.Find("HingeRight"))
+        {
+            animatorRight = transform.Find("HingeRight").GetComponent<Animator>();
+            rightHinge = true;
+        }
     }
 
     private void OnTriggerEnter(Collider collide)
@@ -42,12 +55,30 @@ public class DoorOpen : MonoBehaviour
         {
             if (isOpen)
             {
-                animator.SetBool("open", false);
+                if (leftHinge)
+                {
+                    animatorLeft.SetBool("open", false);
+                }
+
+                if (rightHinge)
+                {
+                    animatorRight.SetBool("open", false);
+                }
+
                 isOpen = false;
             }
             else
             {
-                animator.SetBool("open", true);
+                if (leftHinge)
+                {
+                    animatorLeft.SetBool("open", true);
+                }
+
+                if (rightHinge)
+                {
+                    animatorRight.SetBool("open", true);
+                }
+                
                 isOpen = true;
             }
         }
