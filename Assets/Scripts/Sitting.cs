@@ -51,6 +51,7 @@ public class Sitting : MonoBehaviour
                 player.transform.rotation = chair.rotation;
 
                 animator.SetBool("sit", true);
+                player.GetComponent<CharacterController>().enabled = false;
                 sitting = true;
             }
         }
@@ -58,11 +59,12 @@ public class Sitting : MonoBehaviour
         if (sitting && Input.GetKeyDown(KeyCode.W))
         {
             animator.SetBool("sit", false);
+            player.GetComponent<CharacterController>().enabled = true;
             sitting = false;
         }
     }
 
-    public bool GetSitting()
+    public bool isSitting()
     {
         return sitting;
     }
