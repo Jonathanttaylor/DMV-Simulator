@@ -46,10 +46,10 @@ public class DoorOpen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interactDoor();
+        InteractDoor();
     }
 
-    private void interactDoor()
+    private void InteractDoor()
     {
         if (isInRange && Input.GetKeyDown(KeyCode.E))
         {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+    public Sitting other;
+
     [SerializeField] float sensitivity = 100f;
     [SerializeField] float maxAngle = 90f;
     [SerializeField] Transform player;
