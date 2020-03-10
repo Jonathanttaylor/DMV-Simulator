@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b62ad6accb34348a9b608ec78ada24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  other: {fileID: 0}
+  sit: {fileID: 0}
   sensitivity: 100
   maxAngle: 90
   player: {fileID: 1464782786}

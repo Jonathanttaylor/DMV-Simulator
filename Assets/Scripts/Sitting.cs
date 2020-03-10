@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Sitting : MonoBehaviour
 {
-    [SerializeField] Transform chair;
+    public PlayerLook look;
+
+    [SerializeField] Transform animationStart;
     private GameObject player;
     private Animator animator;
     private bool isInRange;
-    private bool sitting;
+    private bool isSitting;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        look = FindObjectOfType(typeof(PlayerLook)) as PlayerLook;
+
         player = GameObject.FindGameObjectWithTag("Player");
         animator = player.GetComponent<Animator>();
-        animator.SetBool("sit", false);
-        sitting = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,6 +42,12 @@ public class Sitting : MonoBehaviour
     void Update()
     {
         InteractSeat();
+
+        if (isSitting)
+        {
+            look.SittingLookAround();
+        }
+
     }
 
     void InteractSeat()
@@ -47,25 +56,22 @@ public class Sitting : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.position = chair.position;
-                player.transform.rotation = chair.rotation;
+                player.transform.position = animationStart.position;
+                player.transform.rotation = animationStart.rotation;
 
                 animator.SetBool("sit", true);
                 player.GetComponent<CharacterController>().enabled = false;
-                sitting = true;
+                player.transform.Find("Camera").GetComponent<PlayerLook>().enabled = false;
+                isSitting = true;
             }
         }
 
-        if (sitting && Input.GetKeyDown(KeyCode.W))
+        if (isSitting && Input.GetKeyDown(KeyCode.W))
         {
             animator.SetBool("sit", false);
             player.GetComponent<CharacterController>().enabled = true;
-            sitting = false;
+            player.transform.Find("Camera").GetComponent<PlayerLook>().enabled = true;
+            isSitting = false;
         }
-    }
-
-    public bool isSitting()
-    {
-        return sitting;
     }
 }

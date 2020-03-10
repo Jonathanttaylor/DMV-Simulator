@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    public Sitting sit;
-
     [SerializeField] float sensitivity = 100f;
     [SerializeField] float maxAngle = 90f;
     [SerializeField] Transform player;
@@ -16,23 +14,13 @@ public class PlayerLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sit = FindObjectOfType(typeof(Sitting)) as Sitting;
         Cursor.lockState = CursorLockMode.Locked; //Locks cursor to center view
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!sit.isSitting())
-        {
-            LookAround();
-        }
-
-        if (sit.isSitting())
-        {
-            SittingLookAround();
-        }
-
+        LookAround();
     }
 
     private void LookAround()
@@ -49,7 +37,7 @@ public class PlayerLook : MonoBehaviour
         player.Rotate(Vector3.up * mouseX);
     }
 
-    private void SittingLookAround()
+    public void SittingLookAround()
     {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;

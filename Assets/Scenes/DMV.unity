@@ -6375,6 +6375,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 416208891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &416873223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1570773561403146, guid: bc0122c4f4cf45141b4325e217b4288f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1818420530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &416873224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416873223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e399050c21a0340599be44fb6b8dca6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chair: {fileID: 482280148}
+--- !u!65 &416873225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416873223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.54470754, y: 0.8170257, z: 0.7}
+  m_Center: {x: 0.0000038146973, y: 0.40851286, z: -0.00989769}
 --- !u!4 &418085492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4618513169714114, guid: 79a341f0ed938f14599ea1ecb9abac2e,
@@ -7452,6 +7484,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79a341f0ed938f14599ea1ecb9abac2e, type: 3}
+--- !u!1 &482280147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482280148}
+  m_Layer: 0
+  m_Name: Chair52Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &482280148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482280147}
+  m_LocalRotation: {x: -0, y: 0.012235431, z: -0, w: -0.99992514}
+  m_LocalPosition: {x: -0.123, y: 0.884, z: 0.474}
+  m_LocalScale: {x: 0.79999954, y: 0.8, z: 0.79999954}
+  m_Children: []
+  m_Father: {fileID: 1818420531}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &483284174
 PrefabInstance:
   m_ObjectHideFlags: 0
