@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class BusDoors : MonoBehaviour
 {
-    private Animator animatorLeft;
-    private Animator animatorRight;
+    private Animator animator;
     private bool isOpen = false;
-    private bool isInRange = false;
+    private bool toggleDoors = false;
 
     // Start is called before the first frame update
     void Start()
     {
-            animatorLeft = transform.Find("HingeLeft").GetComponent<Animator>();
-            animatorRight = transform.Find("HingeRight").GetComponent<Animator>();
+            animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider collide)
     {
         if (collide.tag == "Player")
         {
-            isInRange = true;
+            toggleDoors = true;
         }
     }
 
@@ -28,7 +26,7 @@ public class BusDoors : MonoBehaviour
     {
         if (collide.tag == "Player")
         {
-            isInRange = false;
+            toggleDoors = true;
         }
     }
 
@@ -40,20 +38,20 @@ public class BusDoors : MonoBehaviour
 
     private void interactDoor()
     {
-        if (isInRange)
+        if (toggleDoors)
         {
             if (isOpen)
             {
-                    animatorLeft.SetBool("open", false);
-                    animatorRight.SetBool("open", false);
-            
+                animator.SetBool("open", false);
+
+                toggleDoors = false;
                 isOpen = false;
             }
             else
             {
-                    animatorLeft.SetBool("open", true);
-                    animatorRight.SetBool("open", true);
-             
+                animator.SetBool("open", true);
+
+                toggleDoors = false;
                 isOpen = true;
             }
         }
