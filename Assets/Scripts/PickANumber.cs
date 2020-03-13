@@ -4,28 +4,41 @@ using UnityEngine;
 
 public class PickANumber : MonoBehaviour
 {
-    Rect rect;
+    public NowServingNumber nowserving;
+
+    Rect rectTicket;
+    Rect rectNumber;
+    Rect rectLetter;
     Texture texture;
     bool isInRange;
     bool displayNumber;
+    private string ticketLetter;
+    private int ticketNumber;
+    readonly GUIStyle style = new GUIStyle();
 
     // Start is called before the first frame update
     void Start()
     {
-        float size = Screen.width * 0.2f;
-        rect = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, size, size);
+        nowserving = FindObjectOfType(typeof(NowServingNumber)) as NowServingNumber;
+
+        rectTicket = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.width * 0.2f);
         texture = Resources.Load<Texture2D>("Textures/number");
+
+        rectNumber = new Rect((Screen.width * 0.1f) + 70, (Screen.height * 0.7f) + 80, Screen.width * 0.3f, Screen.width * 0.3f);
+        rectLetter = new Rect((Screen.width * 0.1f) + 50, (Screen.height * 0.7f) + 80, Screen.width * 0.3f, Screen.width * 0.3f);
+
+        style.normal.textColor = Color.black;
+        style.fontSize = 20;
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("InRange");
         isInRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Not In Range");
         isInRange = false;
     }
 
@@ -37,8 +50,10 @@ public class PickANumber : MonoBehaviour
 
     void TakeNumber()
     {
-        if (isInRange && Input.GetKeyDown(KeyCode.E))
+        if (isInRange && Input.GetKeyDown(KeyCode.E) && !displayNumber)
         {
+            ticketNumber = nowserving.GetNumber() + Random.Range(5, 15);
+            ticketLetter = nowserving.GetLetter();
             displayNumber = true;
         }
     }
@@ -47,7 +62,9 @@ public class PickANumber : MonoBehaviour
     {
         if (displayNumber)
         {
-            GUI.DrawTexture(rect,texture);
+            GUI.DrawTexture(rectTicket, texture);
+            GUI.Label(rectLetter, ticketLetter.ToString(), style);
+            GUI.Label(rectNumber, ticketNumber.ToString(), style);
         }
     }
 }
