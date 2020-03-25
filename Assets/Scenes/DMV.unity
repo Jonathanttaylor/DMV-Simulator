@@ -6502,7 +6502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e399050c21a0340599be44fb6b8dca6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  look: {fileID: 0}
   animationStart: {fileID: 482280148}
 --- !u!65 &416873225
 BoxCollider:
