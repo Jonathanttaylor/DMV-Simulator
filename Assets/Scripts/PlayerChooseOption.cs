@@ -48,6 +48,12 @@ public class PlayerChooseOption : MonoBehaviour
             playerTransform.LookAt(gameObject.transform);
             transform.LookAt(playerTransform);
             GameObject.Find("Canvas").GetComponent<Canvas>().enabled = true;
+            if (isPressed)
+            {
+                GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
+                playerTransform.SetPositionAndRotation(playerTransform.position, new Quaternion(0,0,0,0));
+                hasInteracted = true;
+            }
         }
         if (!fixedView && hasInteracted)
         {
@@ -62,8 +68,5 @@ public class PlayerChooseOption : MonoBehaviour
     {
         Debug.Log("Button Pressed!");
         isPressed = true;
-        GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
-        playerTransform.SetPositionAndRotation(playerTransform.position, new Quaternion(0, 0, 0, 0));
-        hasInteracted = true;
     }
 }

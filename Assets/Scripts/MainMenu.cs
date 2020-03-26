@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(4, LoadSceneMode.Additive);
         SceneManager.LoadScene(5, LoadSceneMode.Additive);
         SceneManager.LoadScene(6, LoadSceneMode.Additive);
-        SceneManager.LoadScene(7, LoadSceneMode.Additive);
+      //  SceneManager.LoadScene(7, LoadSceneMode.Additive);
     }
 
     public void QuitGame()
