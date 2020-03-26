@@ -20,7 +20,7 @@ public class NowServingNumber : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         transform.GetComponent<TextMesh>().text = "" + letter + " " + number;
 
         UpdateNumber();
