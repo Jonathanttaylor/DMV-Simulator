@@ -13,6 +13,8 @@ public class PlayerChooseOption : MonoBehaviour
     private Transform playerTransform;
     private bool hasInteracted = false;
     private bool isInRange = false;
+    private bool fixedView = false;
+    private bool isPressed = false;
 
     void Start()
     {
@@ -40,24 +42,28 @@ public class PlayerChooseOption : MonoBehaviour
     {
         if (isInRange && !hasInteracted)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
             GameObject.Find("MainPlayer").GetComponent<PlayerWalking>().enabled = false;
             GameObject.Find("Camera").GetComponent<PlayerLook>().enabled = false;
             playerTransform.LookAt(gameObject.transform);
             transform.LookAt(playerTransform);
             GameObject.Find("Canvas").GetComponent<Canvas>().enabled = true;
-            if (Input.GetKey(KeyCode.E))
-            {
-                GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
-                playerTransform.SetPositionAndRotation(playerTransform.position, new Quaternion(0,0,0,0));
-                hasInteracted = true;
-            }
         }
-        else
+        if (!fixedView && hasInteracted)
         {
-            //Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.Locked;
+            fixedView = true;
             GameObject.Find("MainPlayer").GetComponent<PlayerWalking>().enabled = true;
             GameObject.Find("Camera").GetComponent<PlayerLook>().enabled = true;
         }
+    }
+
+    public void buttonPressed()
+    {
+        Debug.Log("Button Pressed!");
+        isPressed = true;
+        GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
+        playerTransform.SetPositionAndRotation(playerTransform.position, new Quaternion(0, 0, 0, 0));
+        hasInteracted = true;
     }
 }
