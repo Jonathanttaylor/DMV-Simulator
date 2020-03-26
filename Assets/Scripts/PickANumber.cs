@@ -24,8 +24,8 @@ public class PickANumber : MonoBehaviour
         rectTicket = new Rect(Screen.width * 0.1f, Screen.height * 0.7f, Screen.width * 0.2f, Screen.width * 0.2f);
         texture = Resources.Load<Texture2D>("Textures/number");
 
-        rectNumber = new Rect((Screen.width * 0.1f) + 70, (Screen.height * 0.7f) + 80, Screen.width * 0.3f, Screen.width * 0.3f);
-        rectLetter = new Rect((Screen.width * 0.1f) + 50, (Screen.height * 0.7f) + 80, Screen.width * 0.3f, Screen.width * 0.3f);
+        rectNumber = new Rect((Screen.width * 0.2f), (Screen.height * 0.9f), Screen.width * 0.3f, Screen.width * 0.3f);
+        rectLetter = new Rect((Screen.width * 0.18f), (Screen.height * 0.9f), Screen.width * 0.3f, Screen.width * 0.3f);
 
         style.normal.textColor = Color.black;
         style.fontSize = 20;
