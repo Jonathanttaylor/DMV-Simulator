@@ -77,6 +77,7 @@ public class BusSitting : MonoBehaviour
 
         if (move.GetIsBraking() && move.GetCurrentSpeed() > -0.1 && Input.GetKeyDown(KeyCode.W))
         {
+            print("Here");
             animator.SetBool("sit", false); // Starts standing animation
 
             // Resets player controls to normal 

@@ -16,7 +16,7 @@ public class BusDoors : MonoBehaviour
 
     private void OnTriggerEnter(Collider collide)
     {
-        if (collide.tag == "Player")
+        if (collide.CompareTag("Player"))
         {
             toggleDoors = true;
         }
@@ -24,7 +24,7 @@ public class BusDoors : MonoBehaviour
 
     private void OnTriggerExit(Collider collide)
     {
-        if (collide.tag == "Player")
+        if (collide.CompareTag("Player"))
         {
             toggleDoors = true;
         }
