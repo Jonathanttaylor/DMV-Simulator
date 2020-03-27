@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Linq;
-using UnityEditor.PackageManager;
-using UnityEditor.PackageManager.Requests;
-using UnityEditor.Compilation;
+//using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager.Requests;
+//using UnityEditor.Compilation;
 using System.Text.RegularExpressions;
 
 namespace SNAP
@@ -547,7 +547,7 @@ namespace SNAP
         }
 
 
-        [MenuItem("Snaps/Asset Swap Tool")]
+        //[MenuItem("Snaps/Asset Swap Tool")]
         static void ShowSwapTool()
         {
             SwapTool SwapWindow = EditorWindow.GetWindow<SwapTool>();
