@@ -1,14 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
-using UnityEditor.Compilation;
+//using UnityEditor.Compilation;
 
 namespace SNAP
-{ 
+{
     public enum SnapRP
     {
         Default,
