@@ -7,29 +7,43 @@ public class BusMovement : MonoBehaviour
 {
     // Setting Serialized Fields
     [SerializeField] Transform busRoute;
+    [SerializeField] Transform startRoute;
     [SerializeField] WheelCollider wheelFL;
     [SerializeField] WheelCollider wheelFR;
     [SerializeField] WheelCollider wheelRL;
     [SerializeField] WheelCollider wheelRR;
     [SerializeField] float currentSpeed;
     [SerializeField] float maxTurnAngle = 45f;
-    [SerializeField] float maxSpeed = 500;
+    [SerializeField] float maxSpeed = 3500;
     [SerializeField] float motorTorque = 300;
     [SerializeField] float brakeTorque = 1500;
     [SerializeField] float stopTime;
+    [SerializeField] float startStopTime;
+    [SerializeField] float waitTime;
 
     // Setting private members
     private List<Transform> waypoints;
     private int currentWaypoint;
     private bool isBraking;
-    private bool startDriving;
     private bool stopped;
+    private bool startStopped;
+
+    private bool onBus;
+    private List<Transform> startWaypoints;
+    private int startCurrentWaypoint = 0;
+
+    private BusDoors doors;
+    private BusDriverDialogue driver;
 
     // Start is called before the first frame update
     void Start()
     {
-        //isBraking = true;
-        stopTime = 20f;
+        doors = FindObjectOfType(typeof(BusDoors)) as BusDoors;
+        driver = FindObjectOfType(typeof(BusDriverDialogue)) as BusDriverDialogue;
+
+        onBus = false;
+        isBraking = true;
+        waitTime = 150f;
 
         // Creating a list containing all busroute waypoints
         waypoints = new List<Transform>();
@@ -42,18 +56,28 @@ public class BusMovement : MonoBehaviour
                 waypoints.Add(busrouteWaypoints[i]);
             }
         }
+
+        startWaypoints = new List<Transform>();
+        Transform[] startrouteWaypoints = startRoute.GetComponentsInChildren<Transform>();
+
+        for (int i = 0; i < busrouteWaypoints.Length; i++)
+        {
+            if (startrouteWaypoints[i] != startRoute.transform)
+            {
+                startWaypoints.Add(startrouteWaypoints[i]);
+            }
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        print(onBus);
+
         // Setting current speed
         currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 100;
 
-        if (startDriving)
-        {
-            Drive();
-        }
+        Drive();
 
         Turn();
 
@@ -67,18 +91,54 @@ public class BusMovement : MonoBehaviour
         }
 
         StopTimer();
+
+        StartStopTimer();
+
+        WaitTimer();
+    }
+
+    void StartStopTimer()
+    {
+        if (startStopped && !onBus)
+        {
+            startStopTime -= 1 * Time.deltaTime;
+
+            if (startStopTime < 1)
+            {
+                isBraking = false;
+                startStopped = false;
+            }
+        }
     }
 
     void StopTimer()
     {
         if (stopped)
         {
-            stopTime -= 1 * Time.deltaTime; ;
+            stopTime -= 1 * Time.deltaTime;
 
             if (stopTime < 1)
             {
                 isBraking = false;
                 stopped = false;
+            }
+        }
+    }
+
+    void WaitTimer()
+    {
+        if (!onBus)
+        {
+            waitTime -= 1 * Time.deltaTime;
+
+            if (waitTime < 1)
+            {
+                stopped = true;
+                stopTime = 5f;
+                transform.position = new Vector3(1.71f, 1.43f, -39.42f);
+                transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+                startCurrentWaypoint = 0;
+                waitTime = 210f;
             }
         }
     }
@@ -101,19 +161,59 @@ public class BusMovement : MonoBehaviour
     // Turns bus towards next waypoint
     void Turn()
     {
-        Vector3 vectorToWaypoint = -transform.InverseTransformPoint(waypoints[currentWaypoint].position);
-        float newTurnAngle = (vectorToWaypoint.x / vectorToWaypoint.magnitude) * maxTurnAngle;
-        wheelFL.steerAngle = newTurnAngle;
-        wheelFR.steerAngle = newTurnAngle;
+        if (!onBus)
+        {
+            Vector3 vectorToWaypoint = -transform.InverseTransformPoint(startWaypoints[startCurrentWaypoint].position);
+            float newTurnAngle = (vectorToWaypoint.x / vectorToWaypoint.magnitude) * maxTurnAngle;
+            wheelFL.steerAngle = newTurnAngle;
+            wheelFR.steerAngle = newTurnAngle;
+        }
+        else if (onBus)
+        {
+            Vector3 vectorToWaypoint = -transform.InverseTransformPoint(waypoints[currentWaypoint].position);
+            float newTurnAngle = (vectorToWaypoint.x / vectorToWaypoint.magnitude) * maxTurnAngle;
+            wheelFL.steerAngle = newTurnAngle;
+            wheelFR.steerAngle = newTurnAngle;
+        }
     }
 
     // Switches to next waypoint when bus is near
     void ChangeWaypoint()
     {
-        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f)
+        if (Vector3.Distance(transform.position, startWaypoints[startCurrentWaypoint].position) < 1f && !onBus)
+        {
+            if (startCurrentWaypoint == 0)
+            {
+                driver.SetHasInteracted();
+                doors.SetRejectedFalse();
+                motorTorque = 100f;
+                isBraking = true;
+                stopTime = 5f;
+                stopped = true;
+            }
+            else if (startCurrentWaypoint == 3)
+            {
+                isBraking = true;
+                startStopTime = 20f;
+                startStopped = true;
+            }
+            else if (startCurrentWaypoint == 4)
+            {
+                motorTorque = 300f;
+            }
+            else if (startCurrentWaypoint == 13)
+            {
+                isBraking = true;
+            }
+
+            startCurrentWaypoint++;
+        }
+
+        if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f && onBus)
         {
             if (currentWaypoint == 16)
             {
+                doors.SetRejectedFalse();
                 isBraking = true;
                 stopTime = 20f;
                 stopped = true;
@@ -155,9 +255,9 @@ public class BusMovement : MonoBehaviour
             }
             else if (currentWaypoint == 73)
             {
+                doors.SetRejectedFalse();
                 isBraking = true;
             }
-
 
             currentWaypoint++;
         }
@@ -181,7 +281,7 @@ public class BusMovement : MonoBehaviour
     // Sets startDriving flag to true when called
     public void StartDriving()
     {
-        startDriving = true;
+        isBraking = false;
     }
 
     // accessor for isBraking flag
@@ -194,5 +294,15 @@ public class BusMovement : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public void SetOnBus()
+    {
+        onBus = true;
+    }
+
+    public int ReturnCurrentWaypoint()
+    {
+        return currentWaypoint;
     }
 }
