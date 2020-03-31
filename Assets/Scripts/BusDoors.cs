@@ -7,6 +7,7 @@ public class BusDoors : MonoBehaviour
     private Animator animator;
     private bool isOpen = false;
     private bool toggleDoors = false;
+    public bool rejected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,14 @@ public class BusDoors : MonoBehaviour
 
     private void interactDoor()
     {
-        if (toggleDoors)
+        if (rejected)
+        {
+            animator.SetBool("open", false);
+
+            toggleDoors = false;
+            isOpen = false;
+        }
+        else if (toggleDoors)
         {
             if (isOpen)
             {
