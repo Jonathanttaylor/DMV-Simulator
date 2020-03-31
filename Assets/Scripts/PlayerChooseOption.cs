@@ -6,10 +6,6 @@ using UnityEngine.UI;
 public class PlayerChooseOption : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject question;
-    [SerializeField] GameObject answerOne;
-    [SerializeField] GameObject answerTwo;
-    [SerializeField] GameObject answerThree;
     private Transform playerTransform;
     private bool hasInteracted = false;
     private bool isInRange = false;
