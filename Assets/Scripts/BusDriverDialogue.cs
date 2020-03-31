@@ -65,6 +65,7 @@ public class BusDriverDialogue : MonoBehaviour
             walkingScript.enabled = false;
             lookingScript.enabled = false;
             playerTransform.LookAt(gameObject.transform);
+           // transform.Rotate(-90f, 0f, 0f);
             if (wallet.isPickedup)
             {
                 hasInteracted = true;
