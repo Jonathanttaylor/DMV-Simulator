@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class BusMovement : MonoBehaviour
 {
     // Setting Serialized Fields
-    [SerializeField] Transform busroute;
+    [SerializeField] Transform busRoute;
     [SerializeField] WheelCollider wheelFL;
     [SerializeField] WheelCollider wheelFR;
     [SerializeField] WheelCollider wheelRL;
@@ -16,23 +16,28 @@ public class BusMovement : MonoBehaviour
     [SerializeField] float maxSpeed = 500;
     [SerializeField] float motorTorque = 300;
     [SerializeField] float brakeTorque = 1500;
+    [SerializeField] float stopTime;
 
     // Setting private members
     private List<Transform> waypoints;
-    private int currentWaypoint = 0;
+    private int currentWaypoint;
     private bool isBraking;
     private bool startDriving;
+    private bool stopped;
 
     // Start is called before the first frame update
     void Start()
     {
+        isBraking = true;
+        stopTime = 20f;
+
         // Creating a list containing all busroute waypoints
-        Transform[] busrouteWaypoints = busroute.GetComponentsInChildren<Transform>();
         waypoints = new List<Transform>();
+        Transform[] busrouteWaypoints = busRoute.GetComponentsInChildren<Transform>();
 
         for (int i = 0; i < busrouteWaypoints.Length; i++)
         {
-            if (busrouteWaypoints[i] != busroute.transform)
+            if (busrouteWaypoints[i] != busRoute.transform)
             {
                 waypoints.Add(busrouteWaypoints[i]);
             }
@@ -55,6 +60,27 @@ public class BusMovement : MonoBehaviour
         ChangeWaypoint();
 
         Braking();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isBraking = false;
+        }
+
+        StopTimer();
+    }
+
+    void StopTimer()
+    {
+        if (stopped)
+        {
+            stopTime -= 1 * Time.deltaTime; ;
+
+            if (stopTime < 1)
+            {
+                isBraking = false;
+                stopped = false;
+            }
+        }
     }
 
     // Powers and unpowers the busses wheels
@@ -86,14 +112,54 @@ public class BusMovement : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f)
         {
-            if (currentWaypoint == waypoints.Count - 1)
+            if (currentWaypoint == 16)
+            {
+                isBraking = true;
+                stopTime = 20f;
+                stopped = true;
+            }
+            else if (currentWaypoint == 35)
+            {
+                isBraking = true;
+                stopTime = 20f;
+                stopped = true;
+            }
+            else if (currentWaypoint == 41)
+            {
+                isBraking = true;
+                stopTime = 5f;
+                stopped = true;
+                motorTorque = 100;
+            }
+            else if (currentWaypoint == 45)
+            {
+                isBraking = true;
+                stopTime = 5f;
+                stopped = true;
+            }
+            else if (currentWaypoint == 49)
+            {
+                motorTorque = 300;
+            }
+            else if (currentWaypoint == 57)
+            {
+                isBraking = true;
+                stopTime = 20f;
+                stopped = true;
+            }
+            else if (currentWaypoint == 65)
+            {
+                isBraking = true;
+                stopTime = 20f;
+                stopped = true;
+            }
+            else if (currentWaypoint == 73)
             {
                 isBraking = true;
             }
-            else
-            {
-                currentWaypoint++;
-            }
+
+
+            currentWaypoint++;
         }
     }
 
