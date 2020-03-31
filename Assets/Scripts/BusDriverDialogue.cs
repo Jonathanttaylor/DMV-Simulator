@@ -13,6 +13,7 @@ public class BusDriverDialogue : MonoBehaviour
     private PlayerLook lookingScript;
     private PlayerWalking walkingScript;
     private BusDoors busDoorScript;
+    private Quaternion initialPlayer;
     private bool hasInteracted = false;
     private bool isInRange = false;
 
@@ -52,7 +53,7 @@ public class BusDriverDialogue : MonoBehaviour
         {
             dialogue1.enabled = false;
             dialogue2.enabled = false;
-            playerTransform.SetPositionAndRotation(playerTransform.position, new Quaternion(0, 0, 0, 0));
+            playerTransform.SetPositionAndRotation(playerTransform.position, initialPlayer);
             walkingScript.enabled = true;
             lookingScript.enabled = true;
             if (!wallet.isPickedup)
@@ -64,8 +65,9 @@ public class BusDriverDialogue : MonoBehaviour
         {
             walkingScript.enabled = false;
             lookingScript.enabled = false;
+            initialPlayer = player.GetComponent<Transform>().rotation;
             playerTransform.LookAt(gameObject.transform);
-            transform.LookAt(playerTransform);
+           // transform.LookAt(playerTransform);
             if (wallet.isPickedup)
             {
                 hasInteracted = true;

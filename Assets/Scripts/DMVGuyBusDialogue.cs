@@ -43,7 +43,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
         {
             question.enabled = true;
 
-            if (walkingScript.enabled == true)
+            if (walkingScript.enabled)
             {
                 reenableWalking = true;
                 walkingScript.enabled = false;
