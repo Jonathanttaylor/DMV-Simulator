@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PickupWallet : MonoBehaviour
 {
-    [SerializeField] bool isPickedup = false;
+    public bool isPickedup = false;
     private bool isInRange = false;
-    [SerializeField] GameObject wallet;
+    [SerializeField] GameObject walletpart1;
+    [SerializeField] GameObject walletpart2;
+    [SerializeField] GameObject walletpart3;
+    [SerializeField] GameObject walletpart4;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,10 @@ public class PickupWallet : MonoBehaviour
         if (isInRange && !isPickedup && Input.GetKey(KeyCode.E))
         {
             isPickedup = true;
-            Destroy(wallet);
+            walletpart1.GetComponent<Renderer>().enabled = false;
+            walletpart2.GetComponent<Renderer>().enabled = false;
+            walletpart3.GetComponent<Renderer>().enabled = false;
+            walletpart4.GetComponent<Renderer>().enabled = false;
         }
     }
 
