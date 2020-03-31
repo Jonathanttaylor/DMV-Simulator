@@ -211,7 +211,11 @@ public class BusMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < 1f && onBus)
         {
-            if (currentWaypoint == 16)
+            if (currentWaypoint == 0)
+            {
+                motorTorque = 300;
+            }
+            else if (currentWaypoint == 16)
             {
                 doors.SetRejectedFalse();
                 isBraking = true;
@@ -255,7 +259,6 @@ public class BusMovement : MonoBehaviour
             }
             else if (currentWaypoint == 73)
             {
-                doors.SetRejectedFalse();
                 isBraking = true;
             }
 
