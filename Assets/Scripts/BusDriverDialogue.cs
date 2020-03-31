@@ -78,4 +78,9 @@ public class BusDriverDialogue : MonoBehaviour
             }
         }
     }
+
+    public void SetHasInteracted()
+    {
+        hasInteracted = false;
+    }
 }

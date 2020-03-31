@@ -34,10 +34,10 @@ public class BusDoors : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interactDoor();
+        InteractDoor();
     }
 
-    private void interactDoor()
+    private void InteractDoor()
     {
         if (rejected)
         {
@@ -63,5 +63,15 @@ public class BusDoors : MonoBehaviour
                 isOpen = true;
             }
         }
+    }
+
+    public void SetRejectedFalse()
+    {
+        rejected = false;
+    }
+
+    public void SetRejectedTrue()
+    {
+        rejected = true;
     }
 }
