@@ -28,7 +28,7 @@ public class BusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isBraking = true;
+        //isBraking = true;
         stopTime = 20f;
 
         // Creating a list containing all busroute waypoints
@@ -127,14 +127,14 @@ public class BusMovement : MonoBehaviour
             else if (currentWaypoint == 41)
             {
                 isBraking = true;
-                stopTime = 5f;
+                stopTime = 10f;
                 stopped = true;
                 motorTorque = 100;
             }
             else if (currentWaypoint == 45)
             {
                 isBraking = true;
-                stopTime = 5f;
+                stopTime = 6f;
                 stopped = true;
             }
             else if (currentWaypoint == 49)
