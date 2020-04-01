@@ -57,7 +57,7 @@ public class BusSitting : MonoBehaviour
     {
         if (isInRange)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && move.ReturnOnBus())
             {
                 // Moves player infront of chair and starts sitting animation
                 player.transform.position = animationStart.position;

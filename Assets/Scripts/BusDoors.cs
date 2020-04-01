@@ -74,4 +74,9 @@ public class BusDoors : MonoBehaviour
     {
         rejected = true;
     }
+
+    public void ToggleDoors()
+    {
+        toggleDoors = true;
+    }
 }
