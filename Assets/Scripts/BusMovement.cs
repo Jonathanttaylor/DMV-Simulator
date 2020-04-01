@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class BusMovement : MonoBehaviour
 {
@@ -34,6 +34,12 @@ public class BusMovement : MonoBehaviour
 
     private BusDoors doors;
     private BusDriverDialogue driver;
+
+    [SerializeField] NavMeshSurface surface;
+
+    private string stop;
+    private bool meshBuilt;
+    private float delay;
 
     // Start is called before the first frame update
     void Start()
@@ -78,23 +84,13 @@ public class BusMovement : MonoBehaviour
         currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 100;
 
         Drive();
-
         Turn();
-
         ChangeWaypoint();
-
         Braking();
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isBraking = false;
-        }
-
         StopTimer();
-
         StartStopTimer();
-
         WaitTimer();
+        AtStop();
     }
 
     void StartStopTimer()
@@ -140,6 +136,21 @@ public class BusMovement : MonoBehaviour
                 startCurrentWaypoint = 0;
                 waitTime = 210f;
             }
+        }
+    }
+
+    void AtStop()
+    {
+        if (stop == "stop1" && currentSpeed > -0.1 && !meshBuilt)
+        {
+            surface.BuildNavMesh();
+            doors.ToggleDoors();
+            meshBuilt = true;
+        }
+        else if (stop == "stop1" && !stopped)
+        {
+            doors.ToggleDoors();
+            stop = null;
         }
     }
 
@@ -221,6 +232,9 @@ public class BusMovement : MonoBehaviour
                 isBraking = true;
                 stopTime = 20f;
                 stopped = true;
+                meshBuilt = false;
+                delay = 2f;
+                stop = "stop1";
             }
             else if (currentWaypoint == 35)
             {
@@ -307,5 +321,15 @@ public class BusMovement : MonoBehaviour
     public int ReturnCurrentWaypoint()
     {
         return currentWaypoint;
+    }
+
+    public bool ReturnOnBus()
+    {
+        return onBus;
+    }
+
+    public string ReturnStop()
+    {
+        return stop;
     }
 }

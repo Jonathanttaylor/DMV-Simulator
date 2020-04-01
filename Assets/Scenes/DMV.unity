@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 7c62124848f7c47ca9ede85a731aaba7, type: 2}
 --- !u!1001 &999741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6888,10 +6888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc347898dfb1f64e8771d99e2857564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question: {fileID: 0}
-  answerOne: {fileID: 0}
-  answerTwo: {fileID: 0}
-  answerThree: {fileID: 0}
 --- !u!136 &306165423
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24698,7 +24694,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 73
+  m_firstOverflowCharacterIndex: 34
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -24727,7 +24723,7 @@ MonoBehaviour:
     spaceCount: 17
     wordCount: 18
     linkCount: 0
-    lineCount: 5
+    lineCount: 9
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
