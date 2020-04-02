@@ -51,7 +51,7 @@ public class DMVGuyMovement : MonoBehaviour
         if (bus.ReturnStop() == "stop2")
         {
             moved = false;
-            timer = 4f;
+            timer = 5f;
         }
 
         if (bus.ReturnStop() == "stop5" && bus.GetCurrentSpeed() > -0.1 && !moved && dialogue.ReturnIsPressed())
