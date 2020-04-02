@@ -27,6 +27,13 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
     [SerializeField] int wavepoint = 21;
     [SerializeField] GameObject chairSitting;
     private BusSitting chairSittingScript;
+    private AudioSource audio;
+    [SerializeField] AudioClip questionAudio;
+    [SerializeField] AudioClip responseNiceAudio;
+    [SerializeField] AudioClip responseMeanAudio;
+    private bool isQuestion = false;
+    private bool isResponseNice = false;
+    private bool isResponseMean = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +49,7 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         lookingScript = playerCamera.GetComponent<PlayerLook>();
         busScript = bus.GetComponent<BusMovement>();
         chairSittingScript = chairSitting.GetComponent<BusSitting>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,6 +58,12 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         if ((busScript.ReturnCurrentWaypoint() == wavepoint) && !isPressed)
         {
             question.enabled = true;
+            if (!isQuestion)
+            {
+                audio.PlayOneShot(questionAudio);
+                isQuestion = true;
+            }
+            
             /*
                         if (walkingScript.enabled)
                         {
@@ -108,18 +122,29 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
     */
     public void button1Pressed()
     {
+        audio.Stop();
         choice = 1;
         Cursor.lockState = CursorLockMode.Locked;
         question.enabled = false;
+        if (!isResponseMean)
+        {
+
+        }
         responseMean.enabled = true;
         isPressed = true;
     }
     public void button2Pressed()
     {
+        audio.Stop();
         choice = 2;
         Cursor.lockState = CursorLockMode.Locked;
         question.enabled = false;
         responseNice.enabled = true;
         isPressed = true;
+    }
+
+    public bool ReturnIsPressed()
+    {
+        return isPressed;
     }
 }
