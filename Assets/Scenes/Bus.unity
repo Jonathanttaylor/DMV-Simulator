@@ -1807,7 +1807,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 598030889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20f5a180ef2a7074fb27e32e737d5338, type: 3}
+  m_Script: {fileID: 11500000, guid: 7473a4048fc10db4195619933e011696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   question: {fileID: 1021167529}
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   speed: 5
   choice: 0
   bus: {fileID: 3295998737779930241}
-  wavepoint: 73
+  wavepoint: 21
   chairSitting: {fileID: 3295998737779850837}
 --- !u!1001 &610849594
 PrefabInstance:
@@ -3597,8 +3597,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 598030891}
-        m_MethodName: button2Pressed
+      - m_Target: {fileID: 598030893}
+        m_MethodName: button1Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6882,7 +6882,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 598030891}
-        m_MethodName: button1Pressed
+        m_MethodName: button2Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9317,7 +9317,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 598030891}
-        m_MethodName: button2Pressed
+        m_MethodName: button1Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14051,8 +14051,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 598030891}
-        m_MethodName: button1Pressed
+      - m_Target: {fileID: 598030893}
+        m_MethodName: button2Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
