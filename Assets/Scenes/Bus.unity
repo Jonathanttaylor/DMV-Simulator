@@ -1816,7 +1816,7 @@ MonoBehaviour:
   speed: 5
   choice: 0
   bus: {fileID: 3295998737779930241}
-  wavepoint: 21
+  wavepoint: 71
   chairSitting: {fileID: 3295998737779850837}
 --- !u!1001 &610849594
 PrefabInstance:
