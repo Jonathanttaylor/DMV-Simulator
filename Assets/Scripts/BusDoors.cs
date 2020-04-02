@@ -8,6 +8,7 @@ public class BusDoors : MonoBehaviour
     private bool isOpen = false;
     private bool toggleDoors = false;
     public bool rejected = false;
+    public bool stayOpen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,10 @@ public class BusDoors : MonoBehaviour
             toggleDoors = false;
             isOpen = false;
         }
+        else if (stayOpen)
+        {
+            animator.SetBool("open", true);
+        }
         else if (toggleDoors)
         {
             if (isOpen)
@@ -78,5 +83,10 @@ public class BusDoors : MonoBehaviour
     public void ToggleDoors()
     {
         toggleDoors = true;
+    }
+
+    public void SetStayOpen()
+    {
+        stayOpen = true;
     }
 }
