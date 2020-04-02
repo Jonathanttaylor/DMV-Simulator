@@ -95,7 +95,7 @@ public class DMVInteraction : MonoBehaviour
 
         if (allChoicesMade)
         {
-            if (choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice < 4)
+            if (choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice < 5)
             {
                 if (!alreadyEnabled)
                 {
