@@ -122,4 +122,9 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         responseNice.enabled = true;
         isPressed = true;
     }
+
+    public bool ReturnIsPressed()
+    {
+        return isPressed;
+    }
 }

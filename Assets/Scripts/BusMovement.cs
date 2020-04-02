@@ -78,7 +78,10 @@ public class BusMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        print(onBus);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            surface.BuildNavMesh();
+        }
 
         // Setting current speed
         currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 100;
@@ -151,6 +154,17 @@ public class BusMovement : MonoBehaviour
         {
             doors.ToggleDoors();
             stop = null;
+        }
+        else if (stop == "stop5" && currentSpeed > -0.1 && !meshBuilt)
+        {
+            delay -= 1 * Time.deltaTime;
+
+            if (delay < 1)
+            {
+                surface.BuildNavMesh();
+                doors.SetStayOpen();
+                meshBuilt = true;
+            }
         }
     }
 
@@ -241,6 +255,7 @@ public class BusMovement : MonoBehaviour
                 isBraking = true;
                 stopTime = 20f;
                 stopped = true;
+                stop = "stop2";
             }
             else if (currentWaypoint == 41)
             {
@@ -274,6 +289,9 @@ public class BusMovement : MonoBehaviour
             else if (currentWaypoint == 73)
             {
                 isBraking = true;
+                meshBuilt = false;
+                delay = 2f;
+                stop = "stop5";
             }
 
             currentWaypoint++;
