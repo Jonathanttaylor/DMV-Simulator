@@ -37,12 +37,14 @@ public class DMVInteraction : MonoBehaviour
     private bool hadFirstInteract = false;
     private bool alreadyEnabled = false;
     [SerializeField] AudioClip neednum;
-    [SerializeField] AudioClip responseNiceAudio;
-    [SerializeField] AudioClip responseMeanAudio;
+    [SerializeField] AudioClip helpAround;
+    [SerializeField] AudioClip toolate;
+    [SerializeField] AudioClip nothingCanDo;
     private AudioSource audio;
-    private bool isQuestion = false;
-    private bool isResponseNice = false;
-    private bool isResponseMean = false;
+    private bool isNeedNum = false;
+    private bool ishelpAround = false;
+    private bool isTooLate = false;
+    private bool isNothingCanDo= false;
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,7 @@ public class DMVInteraction : MonoBehaviour
         takeANumberScript = TakeANumber.GetComponent<PickANumber>();
         nowServingNumScript = nowServingNum.GetComponent<NowServingNumber>();
         choices = GameObject.FindGameObjectWithTag("Choices");
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -96,6 +99,8 @@ public class DMVInteraction : MonoBehaviour
             {
                 if (!alreadyEnabled)
                 {
+                    audio.Stop();
+                    audio.PlayOneShot(helpAround);
                     helpAroundBack.enabled = true;
                     alreadyEnabled = true;
                 }
@@ -105,6 +110,8 @@ public class DMVInteraction : MonoBehaviour
             {
                 if (!alreadyEnabled)
                 {
+                    audio.Stop();
+                    audio.PlayOneShot(nothingCanDo);
                     nothingICanDo.enabled = true;
                     alreadyEnabled = true;
                 }
@@ -135,6 +142,12 @@ public class DMVInteraction : MonoBehaviour
         {
             StartingInteract();
             needNumber.enabled = true;
+            if (!isNeedNum)
+            {
+                audio.Stop();
+                audio.PlayOneShot(neednum);
+                isNeedNum = true;
+            }
             hasToldGetNum = true;
         }
         if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0) && needNumber.enabled)
@@ -151,6 +164,12 @@ public class DMVInteraction : MonoBehaviour
             hadSecondInteract = true;
             StartingInteract();
             Cursor.lockState = CursorLockMode.None;
+            if (!isTooLate)
+            {
+                audio.Stop();
+                audio.PlayOneShot(toolate);
+                isTooLate = true;
+            }
             tooLate.enabled = true;
         }
     }
