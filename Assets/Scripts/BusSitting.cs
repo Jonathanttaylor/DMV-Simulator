@@ -11,6 +11,7 @@ public class BusSitting : MonoBehaviour
     private PlayerLook look;
     private BusMovement move;
     private GameObject player;
+    private DMVGuyBusDialogue1 dialogue;
     private bool isInRange;
     private bool isSitting;
     public bool disableLook = false;
@@ -19,6 +20,7 @@ public class BusSitting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dialogue = FindObjectOfType(typeof(DMVGuyBusDialogue1)) as DMVGuyBusDialogue1;
         look = FindObjectOfType(typeof(PlayerLook)) as PlayerLook;
         move = FindObjectOfType(typeof(BusMovement)) as BusMovement;
 
@@ -76,7 +78,7 @@ public class BusSitting : MonoBehaviour
             }
         }
 
-        if (move.GetIsBraking() && move.GetCurrentSpeed() > -0.1 && Input.GetKeyDown(KeyCode.W) && move.ReturnCurrentWaypoint() >= 73)
+        if (move.GetIsBraking() && move.GetCurrentSpeed() > -0.1 && Input.GetKeyDown(KeyCode.W) && move.ReturnCurrentWaypoint() >= 73 && dialogue.ReturnIsPressed())
         {
             animator.SetBool("sit", false); // Starts standing animation
 
