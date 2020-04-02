@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2058e3336aead8946852d9e112118846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.16
+  speed: 0.25
   main: {fileID: 8300000, guid: 42ac486cef108464da9b6a6a0e8755ee, type: 3}
   badComedians: {fileID: 8300000, guid: 2d202498f58689048b1e45aa857148df, type: 3}
   target: {fileID: 1818799864}

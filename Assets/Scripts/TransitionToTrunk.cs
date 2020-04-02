@@ -21,12 +21,13 @@ public class TransitionToTrunk : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         Black.canvasRenderer.SetAlpha(0.0f);
+        interaction = computerFace.GetComponent<DMVInteraction>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isInRange)
+        if (interaction.isTrunkEnding && isInRange)
         {
             Black.canvasRenderer.SetAlpha(1.0f);
             if (!isPlaying)

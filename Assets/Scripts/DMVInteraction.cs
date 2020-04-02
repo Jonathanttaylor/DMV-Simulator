@@ -12,32 +12,30 @@ public class DMVInteraction : MonoBehaviour
     private PlayerLook lookingScript;
     public int choice;
     private bool isInRange = false;
-    private bool hadSecondInteract = false;
-    private bool hadFirstInteract = false;
     private bool hasToldGetNum = false;
     private Quaternion initialPlayer;
     private Quaternion initialComputer;
     [SerializeField] Canvas needNumber;
     [SerializeField] Canvas helpAroundBack;
     [SerializeField] Canvas tooLate;
-    [SerializeField] Canvas tooLateAgain;
     [SerializeField] Canvas nothingICanDo;
-    [SerializeField] Image red;
-    [SerializeField] float maxAlpha = 1.0f;
-    [SerializeField] float minAlpha = 0.0f;
-    [SerializeField] float time = 5.0f;
     [SerializeField] GameObject TakeANumber;
     [SerializeField] GameObject nowServingNum;
     private GameObject choices;
     private NowServingNumber nowServingNumScript;
     private PickANumber takeANumberScript;
-    [SerializeField] int trunkIndex;
-    [SerializeField] int tortureIndex;
-    [SerializeField] int ticketNumber = 1000;
-    [SerializeField] int servingNumber = 0;
-    public bool restart = false;
+    [SerializeField] int ticketNumber;
+    [SerializeField] int servingNumber;
     public bool isTrunkEnding = false;
-    public bool isTortureEnding = false;
+    public bool startTortureEnding = false;
+    private bool refused = false;
+    private bool tookAnother = false;
+    public int total = 0;
+    private bool hadSecondInteract = false;
+    public bool allChoicesMade = false;
+    public bool endCanvasClosed = false;
+    private bool hadFirstInteract = false;
+    private bool alreadyEnabled = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,9 +47,8 @@ public class DMVInteraction : MonoBehaviour
         needNumber.enabled = false;
         helpAroundBack.enabled = false;
         tooLate.enabled = false;
-        tooLateAgain.enabled = false;
         nothingICanDo.enabled = false;
-        red.canvasRenderer.SetAlpha(0.0f);
+        //red.canvasRenderer.SetAlpha(0.0f);
         takeANumberScript = TakeANumber.GetComponent<PickANumber>();
         nowServingNumScript = nowServingNum.GetComponent<NowServingNumber>();
         choices = GameObject.FindGameObjectWithTag("Choices");
@@ -60,26 +57,53 @@ public class DMVInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     //   int number = nowServingNumScript.number;
-        servingNumber = takeANumberScript.nowserving.number;
+        int sum = choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice;
+        total = sum;
+
         ticketNumber = takeANumberScript.ticketNumber;
+        servingNumber = nowServingNumScript.number;
 
         if (isInRange)
         {
             goTakeANum();
+
             hasNum();
         }
 
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0)) && tooLate.enabled)
+        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0)) && (helpAroundBack.enabled || nothingICanDo.enabled))
         {
-            EndInteract();
+            endCanvasClosed = true;
+            helpAroundBack.enabled = false;
+            nothingICanDo.enabled = false;
         }
-    }
 
-    private void fadeToRed()
-    {
-        red.canvasRenderer.SetAlpha(minAlpha);
-        red.CrossFadeAlpha(maxAlpha, time, false);
+        if (walkingScript.enabled)
+        {
+            helpAroundBack.enabled = false;
+            nothingICanDo.enabled = false;
+        }
+
+        if (allChoicesMade)
+        {
+            if (choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice < 4)
+            {
+                if (!alreadyEnabled)
+                {
+                    helpAroundBack.enabled = true;
+                    alreadyEnabled = true;
+                }
+                isTrunkEnding = true;
+            }
+            else
+            {
+                if (!alreadyEnabled)
+                {
+                    nothingICanDo.enabled = true;
+                    alreadyEnabled = true;
+                }
+                startTortureEnding = true;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider collide)
@@ -106,8 +130,9 @@ public class DMVInteraction : MonoBehaviour
             needNumber.enabled = true;
             hasToldGetNum = true;
         }
-        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0) && needNumber.enabled)
         {
+            hadFirstInteract = true;
             EndInteract();
         }
     }
@@ -126,42 +151,19 @@ public class DMVInteraction : MonoBehaviour
     public void refuse()
     {
         choice = 1;
+        allChoicesMade = true;
         tooLate.enabled = false;
-        int sum = choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice;
-        if (sum < 4)
-        {
-            helpAroundBack.enabled = true;
-            isTrunkEnding = true;
-        }
-        else
-        {
-            isTortureEnding = true;
-        }
+      //  pickEnding();
     }
 
     public void takeAnother()
     {
-        tooLate.enabled = false;
         choice = 2;
-        EndInteract();
-        takeANumberScript.setDisplayTicket();
+        allChoicesMade = true;
+        tooLate.enabled = false;
+        // pickEnding();
     }
 
-    private void chooseEnding()
-    {
-        if (choices.GetComponent<DMVGuyBusDialogue>().choice != 0 && choices.GetComponent<DMVGuyBusDialogue1>().choice != 0 && choice != 0)
-        {
-            int sum = choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice;
-            if (sum < 4)
-            {
-                SceneManager.LoadScene(trunkIndex);
-            }
-            else
-            {
-                SceneManager.LoadScene(tortureIndex);
-            }
-        }
-    }
 
     private void StartingInteract()
     {
@@ -178,12 +180,25 @@ public class DMVInteraction : MonoBehaviour
         needNumber.enabled = false;
         helpAroundBack.enabled = false;
         tooLate.enabled = false;
-        tooLateAgain.enabled = false;
         nothingICanDo.enabled = false;
         player.transform.rotation = initialPlayer;
         transform.rotation = initialComputer;
         walkingScript.enabled = true;
         lookingScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    
+    private void pickEnding()
+    {
+        if (choices.GetComponent<DMVGuyBusDialogue>().choice + choices.GetComponent<DMVGuyBusDialogue1>().choice + choice < 4)
+        {
+            helpAroundBack.enabled = true;
+            isTrunkEnding = true;
+        }
+        else
+        {
+            nothingICanDo.enabled = true;
+            startTortureEnding = true;
+        }
     }
 }
