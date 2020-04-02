@@ -51,7 +51,7 @@ public class DMVGuyMovement : MonoBehaviour
         if (bus.ReturnStop() == "stop2")
         {
             moved = false;
-            timer = 5f;
+            timer = 4f;
         }
 
         if (bus.ReturnStop() == "stop5" && bus.GetCurrentSpeed() > -0.1 && !moved && dialogue.ReturnIsPressed())
@@ -60,13 +60,13 @@ public class DMVGuyMovement : MonoBehaviour
 
             animator.SetBool("sit", false);
             transform.parent = null;
+            transform.position = waypoint3.position;
             GetComponent<NavMeshAgent>().enabled = true;
 
             timer -= 1 * Time.deltaTime;
 
             if (timer < 0.1f)
             {
-                transform.position = waypoint3.position;
                 Move(waypoint2);
             }
         }
