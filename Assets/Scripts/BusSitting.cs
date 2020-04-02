@@ -13,6 +13,7 @@ public class BusSitting : MonoBehaviour
     private GameObject player;
     private bool isInRange;
     private bool isSitting;
+    public bool disableLook = false;
 
 
     // Start is called before the first frame update
@@ -46,7 +47,7 @@ public class BusSitting : MonoBehaviour
     {
         InteractSeat();
 
-        if (isSitting)
+        if (isSitting && !disableLook)
         {
             look.SittingLookAround();
         }

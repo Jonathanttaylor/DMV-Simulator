@@ -16,6 +16,10 @@ public class BusDriverDialogue : MonoBehaviour
     private Quaternion initialPlayer;
     private bool hasInteracted = false;
     private bool isInRange = false;
+    [SerializeField] AudioClip nice;
+    [SerializeField] AudioClip mean;
+    private AudioSource audioSource;
+  //  private bool isPlaying = false;
 
     void Start()
     {
@@ -29,6 +33,7 @@ public class BusDriverDialogue : MonoBehaviour
         lookingScript = GameObject.Find("Camera").GetComponent<PlayerLook>();
         walkingScript = player.GetComponent<PlayerWalking>();
         busDoorScript = GameObject.Find("FrontDoors").GetComponent<BusDoors>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider collide)
@@ -70,6 +75,7 @@ public class BusDriverDialogue : MonoBehaviour
            // transform.LookAt(playerTransform);
             if (wallet.isPickedup)
             {
+                audioSource.PlayOneShot(nice);
                 hasInteracted = true;
                 dialogue2.enabled = true;
             }
@@ -77,6 +83,7 @@ public class BusDriverDialogue : MonoBehaviour
             {
                 dialogue1.enabled = true; 
                 hasInteracted = true;
+                audioSource.PlayOneShot(mean);
             }
         }
     }
