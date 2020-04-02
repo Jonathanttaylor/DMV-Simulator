@@ -36,6 +36,13 @@ public class DMVInteraction : MonoBehaviour
     public bool endCanvasClosed = false;
     private bool hadFirstInteract = false;
     private bool alreadyEnabled = false;
+    [SerializeField] AudioClip neednum;
+    [SerializeField] AudioClip responseNiceAudio;
+    [SerializeField] AudioClip responseMeanAudio;
+    private AudioSource audio;
+    private bool isQuestion = false;
+    private bool isResponseNice = false;
+    private bool isResponseMean = false;
 
     // Start is called before the first frame update
     void Start()

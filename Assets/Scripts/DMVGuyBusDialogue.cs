@@ -27,6 +27,13 @@ public class DMVGuyBusDialogue : MonoBehaviour
     [SerializeField] int wavepoint = 21;
     [SerializeField] GameObject chairSitting;
     private BusSitting chairSittingScript;
+    [SerializeField] AudioClip questionAudio;
+    [SerializeField] AudioClip responseNiceAudio;
+    [SerializeField] AudioClip responseMeanAudio;
+    private AudioSource audio;
+    private bool isQuestion = false;
+    private bool isResponseNice = false;
+    private bool isResponseMean = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +49,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
         lookingScript = playerCamera.GetComponent<PlayerLook>();
         busScript = bus.GetComponent<BusMovement>();
         chairSittingScript = chairSitting.GetComponent<BusSitting>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,13 +58,19 @@ public class DMVGuyBusDialogue : MonoBehaviour
         if ((busScript.ReturnCurrentWaypoint() == wavepoint) && !isPressed)
         {
             question.enabled = true;
-/*
-            if (walkingScript.enabled)
+            if (!isQuestion)
             {
-                reenableWalking = true;
-                walkingScript.enabled = false;
+                audio.Stop();
+                audio.PlayOneShot(questionAudio);
+                isQuestion = true;
             }
-            */
+            /*
+                        if (walkingScript.enabled)
+                        {
+                            reenableWalking = true;
+                            walkingScript.enabled = false;
+                        }
+                        */
             //lookingScript.enabled = false;
             chairSittingScript.disableLook = true;
             Cursor.lockState = CursorLockMode.None;
@@ -113,6 +127,12 @@ public class DMVGuyBusDialogue : MonoBehaviour
         question.enabled = false;
         responseMean.enabled = true;
         isPressed = true;
+        if (!isResponseMean)
+        {
+            audio.Stop();
+            audio.PlayOneShot(responseMeanAudio);
+            isResponseMean = true;
+        }
     }
     public void button2Pressed()
     {
@@ -121,5 +141,11 @@ public class DMVGuyBusDialogue : MonoBehaviour
         question.enabled = false;
         responseNice.enabled = true;
         isPressed = true;
+        if (!isResponseNice)
+        {
+            audio.Stop();
+            audio.PlayOneShot(responseNiceAudio);
+            isResponseNice = true;
+        }
     }
 }

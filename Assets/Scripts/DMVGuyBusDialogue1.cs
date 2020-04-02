@@ -128,7 +128,9 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         question.enabled = false;
         if (!isResponseMean)
         {
-
+            audio.Stop();
+            audio.PlayOneShot(responseMeanAudio);
+            isResponseMean = true;
         }
         responseMean.enabled = true;
         isPressed = true;
@@ -139,6 +141,12 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         choice = 2;
         Cursor.lockState = CursorLockMode.Locked;
         question.enabled = false;
+        if (!isResponseNice)
+        {
+            audio.Stop();
+            audio.PlayOneShot(responseNiceAudio);
+            isResponseNice = true;
+        }
         responseNice.enabled = true;
         isPressed = true;
     }
