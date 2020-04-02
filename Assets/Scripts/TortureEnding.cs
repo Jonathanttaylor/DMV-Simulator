@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TortureEnding : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class TortureEnding : MonoBehaviour
         Invoke("moveBack", delayBeforeMove);
         Invoke("enableDoor", delayBeforeDoor);
         Invoke("playAmy", delayBeforeAmy);
+        Invoke("goToMain", 15.0f);
         if (transform.position == target.transform.position)
         {
             Black.canvasRenderer.SetAlpha(1.0f);
@@ -57,5 +59,10 @@ public class TortureEnding : MonoBehaviour
     private void playAmy()
     {
         schumer.start = true;
+    }
+
+    private void goToMain()
+    {
+        SceneManager.LoadScene(0);
     }
 }

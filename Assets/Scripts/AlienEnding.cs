@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class AlienEnding : MonoBehaviour
 {
     [SerializeField] Image Black;
@@ -52,6 +52,7 @@ public class AlienEnding : MonoBehaviour
                 count++;
             }
         }
+        Invoke("goToMain", 25.0f);
     }
 
     private void switchCharacters()
@@ -81,5 +82,10 @@ public class AlienEnding : MonoBehaviour
     {
         Black.canvasRenderer.SetAlpha(maxAlpha);
         Black.CrossFadeAlpha(minAlpha, time, false);
+    }
+
+    private void goToMain()
+    {
+        SceneManager.LoadScene(0);
     }
 }
