@@ -61,6 +61,7 @@ public class DMVGuyMovement : MonoBehaviour
             animator.SetBool("sit", false);
             transform.parent = null;
             transform.position = waypoint3.position;
+            transform.rotation = waypoint.rotation;
             GetComponent<NavMeshAgent>().enabled = true;
 
             timer -= 1 * Time.deltaTime;
@@ -94,7 +95,7 @@ public class DMVGuyMovement : MonoBehaviour
     {
         Debug.Log("CheckSit");
         float distance = Vector3.Distance(transform.position, target.position);
-        return distance < 1f;
+        return distance < 1.5f;
     }
 
     private void Sit()
