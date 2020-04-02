@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TrunkEnding : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class TrunkEnding : MonoBehaviour
                 playedCar = true;
             }
         }
+        Invoke("goToMain", 25.0f);
     }
 
     private void fadeToBlack()
@@ -65,5 +67,10 @@ public class TrunkEnding : MonoBehaviour
     private void playTrunk()
     {
         audioSource.PlayOneShot(trunkClosing);
+    }
+
+    private void goToMain()
+    {
+        SceneManager.LoadScene(0);
     }
 }
