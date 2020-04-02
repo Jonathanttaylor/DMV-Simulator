@@ -8,6 +8,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
     [SerializeField] Canvas responseNice;
     [SerializeField] Canvas responseMean;
     private GameObject player;
+    private GameObject playerCamera;
     private Transform playerTransform;
     private PlayerLook lookingScript;
     private PlayerWalking walkingScript;
@@ -21,7 +22,11 @@ public class DMVGuyBusDialogue : MonoBehaviour
     private Quaternion targetRotationNPC;
     [SerializeField] int speed = 5;
     public int choice = 0;
-
+    [SerializeField] GameObject bus;
+    private BusMovement busScript;
+    [SerializeField] int wavepoint = 21;
+    [SerializeField] GameObject chairSitting;
+    private BusSitting chairSittingScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,24 +38,27 @@ public class DMVGuyBusDialogue : MonoBehaviour
         playerTransform = player.GetComponent<Transform>();
         walkingScript = player.GetComponent<PlayerWalking>();
 
-        lookingScript = GameObject.Find("Camera").GetComponent<PlayerLook>();
+        playerCamera = GameObject.Find("Camera");
+        lookingScript = playerCamera.GetComponent<PlayerLook>();
+        busScript = bus.GetComponent<BusMovement>();
+        chairSittingScript = chairSitting.GetComponent<BusSitting>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isInRange && !isPressed)
+        if ((busScript.ReturnCurrentWaypoint() == wavepoint) && !isPressed)
         {
             question.enabled = true;
-
+/*
             if (walkingScript.enabled)
             {
                 reenableWalking = true;
                 walkingScript.enabled = false;
             }
-
-            lookingScript.enabled = false;
-
+            */
+            //lookingScript.enabled = false;
+            chairSittingScript.disableLook = true;
             Cursor.lockState = CursorLockMode.None;
             if (!isLookAt)
             {
@@ -60,8 +68,8 @@ public class DMVGuyBusDialogue : MonoBehaviour
                // targetRotationNPC = Quaternion.LookRotation(player.transform.position - transform.position);
                // player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationPlayer, speed * Time.deltaTime);
               //  transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationNPC, speed * Time.deltaTime);
-                playerTransform.LookAt(gameObject.transform);
-                transform.LookAt(playerTransform);
+                playerCamera.transform.LookAt(transform);
+                transform.Rotate(60, 0, 0);
                 isLookAt = true;
             } 
         }
@@ -70,7 +78,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
         {
             responseMean.enabled = false;
             responseNice.enabled = false;
-            lookingScript.enabled = true;
+          //  lookingScript.enabled = true;
             if (reenableWalking)
             {
                 walkingScript.enabled = true;
@@ -78,9 +86,10 @@ public class DMVGuyBusDialogue : MonoBehaviour
             playerTransform.SetPositionAndRotation(playerTransform.position, initialPlayer);
             transform.SetPositionAndRotation(transform.position, initialNPC);
             hasInteracted = true;
+            chairSittingScript.disableLook = false;
         }
     }
-
+/*
     private void OnTriggerEnter(Collider collide)
     {
         if (collide.tag == "Player") //set to whatever triggers the interaction
@@ -96,13 +105,13 @@ public class DMVGuyBusDialogue : MonoBehaviour
             isInRange = false;
         }
     }
-
+*/
     public void button1Pressed()
     {
         choice = 1;
         Cursor.lockState = CursorLockMode.Locked;
         question.enabled = false;
-        responseNice.enabled = true;
+        responseMean.enabled = true;
         isPressed = true;
     }
     public void button2Pressed()
@@ -111,14 +120,6 @@ public class DMVGuyBusDialogue : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         question.enabled = false;
         responseNice.enabled = true;
-        isPressed = true;
-    }
-    public void button3Pressed()
-    {
-        choice = 3;
-        Cursor.lockState = CursorLockMode.Locked;
-        question.enabled = false;
-        responseMean.enabled = true;
         isPressed = true;
     }
 }
