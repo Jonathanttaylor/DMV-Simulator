@@ -61,7 +61,7 @@ public class DMVGuyMovement : MonoBehaviour
             animator.SetBool("sit", false);
             transform.parent = null;
             transform.position = waypoint3.position;
-            transform.rotation = waypoint.rotation;
+            transform.rotation = waypoint3.rotation;
             GetComponent<NavMeshAgent>().enabled = true;
 
             timer -= 1 * Time.deltaTime;
