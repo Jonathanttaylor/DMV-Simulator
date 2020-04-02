@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 86af8887984a020499d180711c5377d8
+  - enabled: 1
+    path: Assets/Scenes/endingTrunk.unity
+    guid: 0c743b13f6e20b84da9a8df51c8120e1
+  - enabled: 1
+    path: Assets/Scenes/endingAlien.unity
+    guid: 0a0ac8972066a634a8190fe59e569b7e
   m_configObjects: {}

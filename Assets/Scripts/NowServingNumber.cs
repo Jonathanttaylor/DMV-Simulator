@@ -5,7 +5,7 @@ using UnityEngine;
 public class NowServingNumber : MonoBehaviour
 {
     [SerializeField] string letter;
-    [SerializeField] int number;
+    public int number;
     [SerializeField] float timeUntilNextNumber;
 
     // Start is called before the first frame update

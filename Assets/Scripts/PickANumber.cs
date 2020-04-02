@@ -8,24 +8,32 @@ public class PickANumber : MonoBehaviour
     public NowServingNumber nowserving;
     [SerializeField] TextMeshProUGUI number;
     bool isInRange;
-    private int ticketNumber;
-    bool displayTicket = false;
+    public int ticketNumber = 1;
+    public bool displayTicket = false;
+    private GameObject DMVNumber;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.Find("DMV_Number").GetComponent<Canvas>().enabled = false;
+        DMVNumber = GameObject.Find("DMV_Number");
+        DMVNumber.GetComponent<Canvas>().enabled = false;
         nowserving = FindObjectOfType(typeof(NowServingNumber)) as NowServingNumber;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collide)
     {
-        isInRange = true;
+        if (collide.tag == "Player")
+        {
+            isInRange = true;
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider collide)
     {
-        isInRange = false;
+        if (collide.tag == "Player")
+        {
+            isInRange = false;
+        }
     }
 
     // Update is called once per frame
@@ -39,7 +47,7 @@ public class PickANumber : MonoBehaviour
     {
         if (isInRange && Input.GetKeyDown(KeyCode.E) && ! displayTicket)
         {
-            GameObject.Find("DMV_Number").GetComponent<Canvas>().enabled = true;
+            DMVNumber.GetComponent<Canvas>().enabled = true;
 
             ticketNumber = nowserving.GetNumber() + Random.Range(5, 15);
             displayTicket = true;
@@ -48,4 +56,15 @@ public class PickANumber : MonoBehaviour
             
         }
     }
+
+    public bool hasTakenNumber()
+    {
+        return displayTicket;
+    }
+
+    public void setDisplayTicket()
+    {
+        displayTicket = false;
+    }
+
 }
