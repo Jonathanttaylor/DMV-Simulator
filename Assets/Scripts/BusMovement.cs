@@ -15,7 +15,8 @@ public class BusMovement : MonoBehaviour
     [SerializeField] float currentSpeed;
     [SerializeField] float maxTurnAngle = 45f;
     [SerializeField] float maxSpeed = 3500;
-    [SerializeField] float motorTorque = 300;
+    [SerializeField] float lowMotorTorque;
+    [SerializeField] float highMotorTorque;
     [SerializeField] float brakeTorque = 1500;
     [SerializeField] float stopTime;
     [SerializeField] float startStopTime;
@@ -27,6 +28,7 @@ public class BusMovement : MonoBehaviour
     private bool isBraking;
     private bool stopped;
     private bool startStopped;
+    private float motorTorque;
 
     private bool onBus;
     private List<Transform> startWaypoints;
@@ -44,6 +46,8 @@ public class BusMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        motorTorque = lowMotorTorque;
+
         doors = FindObjectOfType(typeof(BusDoors)) as BusDoors;
         driver = FindObjectOfType(typeof(BusDriverDialogue)) as BusDriverDialogue;
 
@@ -78,11 +82,6 @@ public class BusMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            surface.BuildNavMesh();
-        }
-
         // Setting current speed
         currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 100;
 
@@ -173,13 +172,13 @@ public class BusMovement : MonoBehaviour
     {
         if (currentSpeed > -maxSpeed && !isBraking)
         {
-            wheelFL.motorTorque = -motorTorque;
-            wheelFR.motorTorque = -motorTorque;
+            wheelFL.motorTorque = -motorTorque * Time.deltaTime;
+            wheelFR.motorTorque = -motorTorque * Time.deltaTime;
         }
         else
         {
-            wheelFL.motorTorque = 0;
-            wheelFR.motorTorque = 0;
+            wheelFL.motorTorque = 0 * Time.deltaTime;
+            wheelFR.motorTorque = 0 * Time.deltaTime;
         }
     }
 
@@ -211,7 +210,7 @@ public class BusMovement : MonoBehaviour
             {
                 driver.SetHasInteracted();
                 doors.SetRejectedFalse();
-                motorTorque = 100f;
+                motorTorque = lowMotorTorque;
                 isBraking = true;
                 stopTime = 5f;
                 stopped = true;
@@ -224,7 +223,7 @@ public class BusMovement : MonoBehaviour
             }
             else if (startCurrentWaypoint == 4)
             {
-                motorTorque = 300f;
+                motorTorque = highMotorTorque;
             }
             else if (startCurrentWaypoint == 13)
             {
@@ -238,7 +237,7 @@ public class BusMovement : MonoBehaviour
         {
             if (currentWaypoint == 0)
             {
-                motorTorque = 300;
+                motorTorque = highMotorTorque;
             }
             else if (currentWaypoint == 16)
             {
@@ -262,7 +261,7 @@ public class BusMovement : MonoBehaviour
                 isBraking = true;
                 stopTime = 10f;
                 stopped = true;
-                motorTorque = 100;
+                motorTorque = lowMotorTorque;
             }
             else if (currentWaypoint == 45)
             {
@@ -272,7 +271,7 @@ public class BusMovement : MonoBehaviour
             }
             else if (currentWaypoint == 49)
             {
-                motorTorque = 300;
+                motorTorque = highMotorTorque;
             }
             else if (currentWaypoint == 57)
             {
@@ -303,13 +302,13 @@ public class BusMovement : MonoBehaviour
     {
         if (isBraking)
         {
-            wheelRL.brakeTorque = brakeTorque;
-            wheelRR.brakeTorque = brakeTorque;
+            wheelRL.brakeTorque = brakeTorque * Time.deltaTime;
+            wheelRR.brakeTorque = brakeTorque * Time.deltaTime;
         }
         else
         {
-            wheelRL.brakeTorque = 0;
-            wheelRR.brakeTorque = 0;
+            wheelRL.brakeTorque = 0 * Time.deltaTime;
+            wheelRR.brakeTorque = 0 * Time.deltaTime;
         }
     }
 
