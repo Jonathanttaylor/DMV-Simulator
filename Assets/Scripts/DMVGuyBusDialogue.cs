@@ -83,7 +83,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
                // player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationPlayer, speed * Time.deltaTime);
               //  transform.rotation = Quaternion.Slerp(transform.rotation, targetRotationNPC, speed * Time.deltaTime);
                 playerCamera.transform.LookAt(transform);
-                transform.Rotate(-30, 0, 0);
+                transform.Rotate(-25, 0, 0);
                 isLookAt = true;
             } 
         }
