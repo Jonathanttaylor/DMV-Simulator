@@ -26,7 +26,7 @@ public class TransitionToAlien : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time == timeTillStart || timeTest == timeTillStart)
+        if (Time.timeSinceLevelLoad == timeTillStart || timeTest == timeTillStart)
         {
             if(!inProgress)
             {
