@@ -16,7 +16,7 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeF = (Time.time) / 60;
+        timeF = (Time.timeSinceLevelLoad) / 60;
         timeI = Mathf.FloorToInt(timeF) + 15;
 
         if (timeI == 60)
