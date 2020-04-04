@@ -26,14 +26,14 @@ public class TransitionToAlien : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeSinceLevelLoad == timeTillStart || timeTest == timeTillStart)
+        if (Time.timeSinceLevelLoad >= timeTillStart || timeTest == timeTillStart)
         {
             if(!inProgress)
             {
+                inProgress = true;
                 transitionToWhite();
                 audioSource.PlayOneShot(ufo);
                 Invoke("LoadAlienEnding", time + 2.0f);
-                inProgress = true;
             }
         }
     }
