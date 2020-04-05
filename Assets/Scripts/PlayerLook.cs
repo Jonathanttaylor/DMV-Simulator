@@ -15,6 +15,7 @@ public class PlayerLook : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; //Locks cursor to center view
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
