@@ -87,12 +87,16 @@ public class DMVInteraction : MonoBehaviour
             nothingICanDo.enabled = false;
             walkingScript.enabled = true;
             lookingScript.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         if (walkingScript.enabled)
         {
             helpAroundBack.enabled = false;
             nothingICanDo.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         if (allChoicesMade)
@@ -182,7 +186,9 @@ public class DMVInteraction : MonoBehaviour
         choice = 1;
         allChoicesMade = true;
         tooLate.enabled = false;
-      //  pickEnding();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //  pickEnding();
     }
 
     public void takeAnother()
@@ -190,6 +196,8 @@ public class DMVInteraction : MonoBehaviour
         choice = 2;
         allChoicesMade = true;
         tooLate.enabled = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         // pickEnding();
     }
 

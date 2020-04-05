@@ -94,6 +94,8 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         {
             responseMean.enabled = false;
             responseNice.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             //  lookingScript.enabled = true;
             if (reenableWalking)
             {
