@@ -95,8 +95,8 @@ public class DMVInteraction : MonoBehaviour
         {
             helpAroundBack.enabled = false;
             nothingICanDo.enabled = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+         //   Cursor.lockState = CursorLockMode.Locked;
+         //   Cursor.visible = false;
         }
 
         if (allChoicesMade)
