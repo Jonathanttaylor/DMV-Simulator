@@ -27,7 +27,7 @@ public class BusAnnoying : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (busScript.ReturnCurrentWaypoint() == 18)
+        if (busScript.ReturnCurrentWaypoint() == 20)
         {
             audioSource.Stop();
             if (!isPlaying1)
