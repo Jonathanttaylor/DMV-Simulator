@@ -74,6 +74,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
             //lookingScript.enabled = false;
             chairSittingScript.disableLook = true;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             if (!isLookAt)
             {
                 initialPlayer = player.GetComponent<Transform>().rotation;
@@ -124,6 +125,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
     {
         choice = 1;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         question.enabled = false;
         responseMean.enabled = true;
         isPressed = true;
@@ -138,6 +140,7 @@ public class DMVGuyBusDialogue : MonoBehaviour
     {
         choice = 2;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         question.enabled = false;
         responseNice.enabled = true;
         isPressed = true;

@@ -12791,6 +12791,7 @@ MonoBehaviour:
   convo3: {fileID: 8300000, guid: b20f9d546df3344429cfcecd5f42449a, type: 3}
   convo4: {fileID: 8300000, guid: 36cb4f6ddb4e42141b0e63a52e7ebdbd, type: 3}
   bus: {fileID: 3295998737779930241}
+  currentWaypoint: 0
 --- !u!82 &1607346107
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12847,7 +12848,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

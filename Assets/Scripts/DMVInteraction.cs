@@ -166,6 +166,7 @@ public class DMVInteraction : MonoBehaviour
             hadSecondInteract = true;
             StartingInteract();
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             if (!isTooLate)
             {
                 audio.Stop();
@@ -214,6 +215,7 @@ public class DMVInteraction : MonoBehaviour
         walkingScript.enabled = true;
         lookingScript.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     
     private void pickEnding()

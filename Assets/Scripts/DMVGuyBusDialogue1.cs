@@ -34,6 +34,7 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
     private bool isQuestion = false;
     private bool isResponseNice = false;
     private bool isResponseMean = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +75,7 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
             //lookingScript.enabled = false;
             chairSittingScript.disableLook = true;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             if (!isLookAt)
             {
                 initialPlayer = player.GetComponent<Transform>().rotation;
@@ -125,6 +127,7 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         audio.Stop();
         choice = 1;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         question.enabled = false;
         if (!isResponseMean)
         {
@@ -140,6 +143,7 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
         audio.Stop();
         choice = 2;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         question.enabled = false;
         if (!isResponseNice)
         {

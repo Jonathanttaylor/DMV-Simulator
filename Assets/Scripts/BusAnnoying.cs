@@ -17,6 +17,7 @@ public class BusAnnoying : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] GameObject bus;
     private BusMovement busScript;
+    [SerializeField] int currentWaypoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,47 +28,48 @@ public class BusAnnoying : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (busScript.ReturnCurrentWaypoint() == 20)
+        currentWaypoint = busScript.ReturnCurrentWaypoint();
+        if (currentWaypoint == 18)
         {
-            audioSource.Stop();
             if (!isPlaying1)
             {
+                audioSource.Stop();
                 audioSource.PlayOneShot(intro);
                 isPlaying1 = true;
             }  
         }
-        else if (busScript.ReturnCurrentWaypoint() == 30)
+        else if (currentWaypoint == 25)
         {
-            audioSource.Stop();
             if (!isPlaying2)
             {
+                audioSource.Stop();
                 audioSource.PlayOneShot(convo1);
                 isPlaying2 = true;
             }
         }
-        else if (busScript.ReturnCurrentWaypoint() == 40)
+        else if (currentWaypoint == 45)
         {
-            audioSource.Stop();
             if (!isPlaying3)
             {
+                audioSource.Stop();
                 audioSource.PlayOneShot(convo2);
                 isPlaying3 = true;
             }
         }
-        else if (busScript.ReturnCurrentWaypoint() == 50)
+        else if (currentWaypoint == 55)
         {
-            audioSource.Stop();
             if (!isPlaying4)
             {
+                audioSource.Stop();
                 audioSource.PlayOneShot(convo3);
                 isPlaying4 = true;
             }
         }
-        else if (busScript.ReturnCurrentWaypoint() == 50)
+        else if (currentWaypoint == 65)
         {
-            audioSource.Stop();
             if (!isPlaying5)
             {
+                audioSource.Stop();
                 audioSource.PlayOneShot(convo4);
                 isPlaying5 = true;
             }
