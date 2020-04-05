@@ -26,10 +26,10 @@ public class PlayerLook : MonoBehaviour
 
     private void LookAround()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-        player.Rotate(Vector3.up * mouseX); //Rotates about the y-axis to look left and right
+       // player.Rotate(Vector3.up * mouseX); //Rotates about the y-axis to look left and right
 
         xRot -= mouseY; //updates the rotation on the x-axis based on the mouse input on the y-axis
         xRot = Mathf.Clamp(xRot, -maxAngle, maxAngle); //restricts the rotation to our maxAngle;
@@ -40,8 +40,8 @@ public class PlayerLook : MonoBehaviour
 
     public void SittingLookAround()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
         xRot -= mouseY;
         xRot = Mathf.Clamp(xRot, -maxAngle, maxAngle);
