@@ -38,7 +38,7 @@ public class BusAnnoying : MonoBehaviour
                 isPlaying1 = true;
             }  
         }
-        else if (currentWaypoint == 31)
+        else if (currentWaypoint == 37)
         {
             if (!isPlaying2)
             {
