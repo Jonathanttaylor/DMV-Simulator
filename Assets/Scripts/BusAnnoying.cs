@@ -29,7 +29,7 @@ public class BusAnnoying : MonoBehaviour
     void Update()
     {
         currentWaypoint = busScript.ReturnCurrentWaypoint();
-        if (currentWaypoint == 18)
+        if (currentWaypoint == 19)
         {
             if (!isPlaying1)
             {
@@ -38,7 +38,7 @@ public class BusAnnoying : MonoBehaviour
                 isPlaying1 = true;
             }  
         }
-        else if (currentWaypoint == 25)
+        else if (currentWaypoint == 31)
         {
             if (!isPlaying2)
             {

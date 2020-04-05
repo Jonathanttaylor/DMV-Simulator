@@ -161,4 +161,9 @@ public class DMVGuyBusDialogue1 : MonoBehaviour
     {
         return isPressed;
     }
+
+    public bool ReturnHasInteracted()
+    {
+        return hasInteracted;
+    }
 }
