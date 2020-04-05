@@ -9,11 +9,11 @@ public class BusAnnoying : MonoBehaviour
     [SerializeField] AudioClip convo2;
     [SerializeField] AudioClip convo3;
     [SerializeField] AudioClip convo4;
-    private bool isPlaying1;
-    private bool isPlaying2;
-    private bool isPlaying3;
-    private bool isPlaying4;
-    private bool isPlaying5;
+    private bool isPlaying1 = false;
+    private bool isPlaying2 = false;
+    private bool isPlaying3 = false;
+    private bool isPlaying4 = false;
+    private bool isPlaying5 = false;
     private AudioSource audioSource;
     [SerializeField] GameObject bus;
     private BusMovement busScript;
