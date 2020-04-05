@@ -85,6 +85,8 @@ public class DMVInteraction : MonoBehaviour
             endCanvasClosed = true;
             helpAroundBack.enabled = false;
             nothingICanDo.enabled = false;
+            walkingScript.enabled = true;
+            lookingScript.enabled = true;
         }
 
         if (walkingScript.enabled)

@@ -14,13 +14,13 @@ public class BusAnnoying : MonoBehaviour
     private bool isPlaying3;
     private bool isPlaying4;
     private bool isPlaying5;
-    private AudioSource audio;
+    private AudioSource audioSource;
     [SerializeField] GameObject bus;
     private BusMovement busScript;
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         busScript = bus.GetComponent<BusMovement>();
     }
 
@@ -29,46 +29,46 @@ public class BusAnnoying : MonoBehaviour
     {
         if (busScript.ReturnCurrentWaypoint() == 18)
         {
-            audio.Stop();
+            audioSource.Stop();
             if (!isPlaying1)
             {
-                audio.PlayOneShot(intro);
-                isPlaying1= true;
+                audioSource.PlayOneShot(intro);
+                isPlaying1 = true;
             }  
         }
         else if (busScript.ReturnCurrentWaypoint() == 30)
         {
-            audio.Stop();
+            audioSource.Stop();
             if (!isPlaying2)
             {
-                audio.PlayOneShot(convo1);
+                audioSource.PlayOneShot(convo1);
                 isPlaying2 = true;
             }
         }
         else if (busScript.ReturnCurrentWaypoint() == 40)
         {
-            audio.Stop();
+            audioSource.Stop();
             if (!isPlaying3)
             {
-                audio.PlayOneShot(convo2);
+                audioSource.PlayOneShot(convo2);
                 isPlaying3 = true;
             }
         }
         else if (busScript.ReturnCurrentWaypoint() == 50)
         {
-            audio.Stop();
+            audioSource.Stop();
             if (!isPlaying4)
             {
-                audio.PlayOneShot(convo3);
+                audioSource.PlayOneShot(convo3);
                 isPlaying4 = true;
             }
         }
         else if (busScript.ReturnCurrentWaypoint() == 50)
         {
-            audio.Stop();
+            audioSource.Stop();
             if (!isPlaying5)
             {
-                audio.PlayOneShot(convo4);
+                audioSource.PlayOneShot(convo4);
                 isPlaying5 = true;
             }
         }
