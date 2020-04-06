@@ -78,25 +78,26 @@ public class DMVInteraction : MonoBehaviour
             goTakeANum();
 
             hasNum();
-        }
 
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0)) && (helpAroundBack.enabled || nothingICanDo.enabled))
-        {
-            endCanvasClosed = true;
-            helpAroundBack.enabled = false;
-            nothingICanDo.enabled = false;
-            walkingScript.enabled = true;
-            lookingScript.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
 
-        if (walkingScript.enabled)
-        {
-            helpAroundBack.enabled = false;
-            nothingICanDo.enabled = false;
-         //   Cursor.lockState = CursorLockMode.Locked;
-         //   Cursor.visible = false;
+            if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0)) && (helpAroundBack.enabled || nothingICanDo.enabled) && !tooLate.enabled)
+            {
+                endCanvasClosed = true;
+                helpAroundBack.enabled = false;
+                nothingICanDo.enabled = false;
+                walkingScript.enabled = true;
+                lookingScript.enabled = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+
+            if (walkingScript.enabled)
+            {
+                helpAroundBack.enabled = false;
+                nothingICanDo.enabled = false;
+                //   Cursor.lockState = CursorLockMode.Locked;
+                //   Cursor.visible = false;
+            }
         }
 
         if (allChoicesMade)
@@ -156,7 +157,7 @@ public class DMVInteraction : MonoBehaviour
             }
             hasToldGetNum = true;
         }
-        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0) && needNumber.enabled)
+        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Mouse0)) && needNumber.enabled && !tooLate.enabled)
         {
             hadFirstInteract = true;
             EndInteract();
