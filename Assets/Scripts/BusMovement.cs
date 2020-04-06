@@ -292,6 +292,10 @@ public class BusMovement : MonoBehaviour
                 delay = 2f;
                 stop = "stop5";
             }
+            else if (currentWaypoint == 75)
+            {
+                isBraking = true;
+            }
 
             currentWaypoint++;
         }
@@ -300,7 +304,12 @@ public class BusMovement : MonoBehaviour
     // Stops the bus
     void Braking()
     {
-        if (isBraking)
+        if (currentWaypoint == 75 && isBraking)
+        {
+            wheelRL.brakeTorque = 10000 * Time.deltaTime;
+            wheelRR.brakeTorque = 10000 * Time.deltaTime;
+        }
+        else if (isBraking)
         {
             wheelRL.brakeTorque = brakeTorque * Time.deltaTime;
             wheelRR.brakeTorque = brakeTorque * Time.deltaTime;
